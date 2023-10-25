@@ -1,10 +1,5 @@
 # CECS 361 Final Project - OISC
 
-This is a Final Project for CECS 361 at CSULB with professor Amin Rezaei. The goal of the assignment is to create an original project using what we have learned about hardware design and Verilog. The project targets the NexysA7-100T development board used in our courses and is developed using Vivado 2016.2.
+This is a Final Project for CECS 361 at CSULB with professor Amin Rezaei. This is a group project with the goal of creating an original HDL project using what we have learned about hardware design and Verilog thus far. The project targets the NexysA7-100T development board used in our courses and is developed using Vivado 2023.2. The team consists of Adan Arevalo, Ryan Thipavong, and myself.
 
-Our project implements a simple Microcontroller-esque CPU using a One Instruction Set Computer (OISC) architecture.
-
-The lab group consists of:
-- Adan Arevalo
-- Brody Liudzius
-- Ryan Thipavong
+Our project implements a simple Microcontroller-esque CPU built around a Harvard-architecture. This machine is a RISC processor with the instruction set simplified down to only a single operation. This is also know as a One Instruction Set Computer (OISC) architecture. The single operation this machine uses is the Move instruction and it is designed as a [Transport-Triggered Architecture](https://en.wikipedia.org/wiki/Transport_triggered_architecture).
