@@ -13,21 +13,19 @@ module ClockGenerator #(
 
     initial begin
         clock = 0;
-        counter = 1;
+        counter = 0;
     end
 
-    always @ (oscillator) begin
+    always @ (posedge oscillator)
         if (!reset) begin
             if (enable)
-                counter <= counter + 1;
-            if (counter == period) begin
-                counter <= 1;
-                clock <= ~clock;
-            end
+                counter = (counter < period) ? counter + 1 : 0;
         end else begin
-            clock = 0;
-            counter = 1;
+            counter = 0;
         end
-    end
+
+    always @ (counter)
+        if (counter == period - 1)
+           clock = ~clock;
 
 endmodule

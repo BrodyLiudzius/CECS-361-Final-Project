@@ -3,57 +3,64 @@
 module SevenSegmentDriver_tb();
 
     // MODULE PORTS
+    localparam NUM_ANODES = 8;
     localparam BIT_WIDTH = 16;
-    localparam NUM_BCD_DIGITS = 8;
     localparam COMMON_ANODE_1 = 1;
     localparam COMMON_ANODE_2 = 0;
 
-    reg clock;
-    reg [BIT_WIDTH-1:0] binary;
+    reg reset, oscillator;
+    reg [31:0] period;
+    reg [BIT_WIDTH-1:0] binaryInput;
 
-    wire [6:0] sevenSegment1, sevenSegment2;
-    wire [NUM_BCD_DIGITS-1:0] anodes1, anodes2;
+    wire [NUM_ANODES-1:0] anodeMask1, anodeMask2;
+    wire [6:0] segments1, segments2;
 
 
 
     // MODULE INSTANTIATIONS
     SevenSegmentDriver #(
+        .NUM_ANODES(NUM_ANODES),
         .BIT_WIDTH(BIT_WIDTH),
-        .NUM_BCD_DIGITS(NUM_BCD_DIGITS),
         .COMMON_ANODE(COMMON_ANODE_1)
     ) sevenSegmentDriverCA (
-        .oscillator(clock),
-        .binary(binary),
-
-        .sevenSegment(sevenSegment1),
-        .anodes(anodes1)
+        .reset(reset),
+        .oscillator(oscillator),
+        .period(period),
+        .binaryInput(binaryInput),
+        .anodeMask(anodeMask1),
+        .segments(segments1)
     );
 
     SevenSegmentDriver #(
+        .NUM_ANODES(NUM_ANODES),
         .BIT_WIDTH(BIT_WIDTH),
-        .NUM_BCD_DIGITS(NUM_BCD_DIGITS),
         .COMMON_ANODE(COMMON_ANODE_2)
     ) sevenSegmentDriverCC (
-        .oscillator(clock),
-        .binary(binary),
-
-        .sevenSegment(sevenSegment2),
-        .anodes(anodes2)
+        .reset(reset),
+        .oscillator(oscillator),
+        .period(period),
+        .binaryInput(binaryInput),
+        .anodeMask(anodeMask2),
+        .segments(segments2)
     );
 
 
 
     // PROCEDURES
-    always #5 clock = ~clock;
+    always #5 oscillator = ~oscillator;
 
     initial begin
-        clock = 0;
-        binary = {BIT_WIDTH{1'b1}};
+        reset = 1;
+        oscillator = 0;
+        period = 2;
+        binaryInput = {BIT_WIDTH{1'b1}};
+        #5;
 
-        #160;
+        reset = 0;
+
+        #320;
 
         $finish;
-
     end
 
 endmodule
