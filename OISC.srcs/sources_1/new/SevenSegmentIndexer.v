@@ -22,6 +22,7 @@ module SevenSegmentIndexer #(
         .period(period),
         .clock(clock)
     );
+    
 
     initial begin
         index = 0;
