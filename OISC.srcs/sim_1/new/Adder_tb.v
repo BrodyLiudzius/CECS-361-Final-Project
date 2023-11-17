@@ -3,8 +3,8 @@
 module Adder_tb();
 
     // MODULE PORTS
-    localparam DATA_BUS_WIDTH = 16;
-    localparam ADDR_BUS_WIDTH = 8;
+    localparam DATA_BUS_WIDTH = 8;
+    localparam ADDR_BUS_WIDTH = 4;
     localparam INPUT_ADDRESS_1 = 1;
     localparam INPUT_ADDRESS_2 = 2;
     localparam OUTPUT_ADDRESS = 1;
@@ -13,10 +13,7 @@ module Adder_tb();
     reg [DATA_BUS_WIDTH-1:0] dataBusIn;
     wire [DATA_BUS_WIDTH-1:0] dataBusOut;
     reg [ADDR_BUS_WIDTH-1:0] readAddressBus, writeAddressBus;
-
-    reg passed;
     
-
 
 
     // MODULE INSTANTIATIONS
@@ -40,8 +37,11 @@ module Adder_tb();
     // PROCEDURES
     always #5 clock = ~clock;
 
-
+    reg passed;
     integer i,j;
+
+    reg [DATA_BUS_WIDTH-1:0] expected;
+
     initial begin
         passed = 1;
         reset = 1; 
@@ -58,7 +58,9 @@ module Adder_tb();
                 dataBusIn = j;
                 #10;
 
-                if (dataBusOut != i + j)begin
+                expected = i + j;
+
+                if (dataBusOut != expected)begin
                     $display("(", i, ", ", j, ") FAILED.");
                     passed = 0;
                 end
