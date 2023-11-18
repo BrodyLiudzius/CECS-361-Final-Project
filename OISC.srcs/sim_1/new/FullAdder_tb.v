@@ -21,12 +21,31 @@ module FullAdder_tb();
     
     // PROCEDURES
     integer i;
+    reg expected_sum;
+    reg expected_carry;
+    reg passed;
+
     initial begin
+        passed = 1;
         for (i = 0; i < 8; i = i + 1) begin
             {carryIn, a, b} = i;
             #5;
+
+            {expected_carry, expected_sum} = a + b + carryIn;
+
+            if(expected_sum !== sum || expected_carry !== carryOut) begin
+                $display("(", a, ", ", b, carryIn,") FAILED.");
+                passed = 0;
+            end
         end
+
+        $display("----------------------");
+        if (passed)
+            $display("All tests passed");
+        else
+            $display("Tests FAILED");
+        $display("----------------------");
+        
         $finish;
     end
-
 endmodule
