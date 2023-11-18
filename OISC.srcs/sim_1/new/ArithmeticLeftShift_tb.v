@@ -35,21 +35,40 @@ module ArithmeticLeftShift_tb();
     // PROCEDURES
     always #5 clock = ~clock;
 
+    reg passed;
+    integer i; 
+
+    reg [DATA_BUS_WIDTH-1:0] expected; 
+
     initial begin
-        reset = 0;
+        passed = 1;
+        reset = 1; 
         clock = 0;
-        readAddressBus = 2;
+        #10; // reset signal is registered to module
+        reset = 0; // then low to begin normal operation
+        readAddressBus = OUTPUT_ADDRESS;
+        for (i = 0; i < $pow(2,DATA_BUS_WIDTH); i = i+1) begin
+            writeAddressBus = INPUT_ADDRESS;
+            dataBusIn = i;
+            #10;
+            expected = i;
 
-        writeAddressBus = 2;
-        dataBusIn = 10;
-        #10;
+            expected = $signed(expected) <<< 1;
 
-        writeAddressBus = 2;
-        dataBusIn = {DATA_BUS_WIDTH{1'b1}};
-        #10;
-
+            if (dataBusOut != expected)begin
+                $display("(", i, ", ) FAILED.");
+                passed = 0;
+            end
+        end
+        
+         $display("----------------------");
+        if (passed)
+            $display("All tests passed");
+        else
+            $display("Tests FAILED");
+        $display("---------------------");
+        
         $finish;
-
     end
 
 endmodule
