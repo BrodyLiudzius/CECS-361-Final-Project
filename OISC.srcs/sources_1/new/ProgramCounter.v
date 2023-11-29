@@ -39,14 +39,6 @@ module ProgramCounter #(
 
     initial registerData = 0;
 
-    always @ (posedge clock)
-        if (writeEnable & !reset)
-            
-
-    always @ (posedge increment)
-        if (!reset)
-            
-
     always @ (posedge clock) begin
         if (!reset) begin
             if (writeEnable)
