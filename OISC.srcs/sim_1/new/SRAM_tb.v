@@ -18,7 +18,8 @@ module SRAM_tb();
     // MODULE INSTANTIATIONS
     SRAM #(
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
-        .NUM_WORDS(NUM_WORDS)
+        .NUM_WORDS(NUM_WORDS),
+        .HEX_FILE("./hexTest.mem")
     ) uut (
         .reset(reset),
         .address(address),
@@ -31,24 +32,22 @@ module SRAM_tb();
     // PROCEDURES
     integer i;
     initial begin
+        address = 0;
+        reset = 1;
+        #5;
         reset = 0;
-
-        for (i = 0; i < NUM_WORDS; i = i + 1) begin
-            address = i;
-            #5;
-            dataIn = i;
-            #5;
-        end
+        #5;
 
         for (i = 0; i < NUM_WORDS; i = i + 1) begin
             address = i;
             #10;
         end
 
-        reset = 1;
-        #5;
-        reset = 0;
-        #5;
+        for (i = 0; i < NUM_WORDS; i = i + 1) begin
+            address = i;
+            dataIn = i * 10;
+            #10;
+        end
 
         for (i = 0; i < NUM_WORDS; i = i + 1) begin
             address = i;

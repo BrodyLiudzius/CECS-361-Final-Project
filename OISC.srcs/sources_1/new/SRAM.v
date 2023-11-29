@@ -2,7 +2,7 @@
 module SRAM #(
         parameter DATA_BUS_WIDTH = 64,
         parameter NUM_WORDS = 1024,
-        parameter HEX_FILE = "./filepath.hex"
+        parameter HEX_FILE = "./filepath.mem"
     ) (
         input reset,
 
@@ -18,8 +18,7 @@ module SRAM #(
 
     integer i;
     initial
-        for (i = 0; i < NUM_WORDS; i = i + 1)
-            data[i] <= 0;
+        $readmemh(HEX_FILE, data);
 
     // Data write is transport-triggered
     always @ (dataIn) begin
