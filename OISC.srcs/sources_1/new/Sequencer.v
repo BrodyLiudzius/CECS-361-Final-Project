@@ -26,12 +26,10 @@ module Sequencer (
                 end
             endcase
             state <= state + 1;
+        end else begin
+            state = 0;
+            instructionRegisterEnable = 0;
+            programCounterIncrement = 0;
         end
-    
-    always @ (reset) begin
-        state = 0;
-        instructionRegisterEnable = 0;
-        programCounterIncrement = 0;
-    end
 
 endmodule

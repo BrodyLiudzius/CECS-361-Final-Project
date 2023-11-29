@@ -15,10 +15,12 @@ module Register #(
     end
 
     always @ (posedge clock)
-        if (writeEnable & !reset)
-            dataOut <= dataIn;
-
-    always @ (reset)
-        dataOut <= 0;
+        if (!reset) begin
+            if (writeEnable) begin
+                dataOut <= dataIn;
+            end
+        end else
+            dataOut <= 0;
+            
     
 endmodule

@@ -25,9 +25,9 @@ module SRAM #(
     always @ (dataIn)
         if (!reset)
             data[address] <= dataIn;
-
-    always @ (posedge reset)
-        for (i = 0; i < NUM_WORDS; i = i + 1)
-            data[i] <= 0;
+        else begin
+            for (i = 0; i < NUM_WORDS; i = i + 1)
+                data[i] <= 0;
+        end
 
 endmodule

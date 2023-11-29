@@ -37,19 +37,25 @@ module ProgramCounter #(
         .dataOut(dataOut)
     );
 
-    initial
-        registerData = 0;
+    initial registerData = 0;
 
     always @ (posedge clock)
         if (writeEnable & !reset)
-            registerData <= dataIn;
+            
 
     always @ (posedge increment)
         if (!reset)
-            registerData = registerData + 1;
+            
 
-    always @ (reset)
-        registerData <= 0;
+    always @ (posedge clock) begin
+        if (!reset) begin
+            if (writeEnable)
+                registerData = dataIn;
+            if (increment)
+                registerData = registerData + 1;
+        end else
+            registerData = 0;
+    end
 
 
 endmodule

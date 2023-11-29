@@ -14,16 +14,8 @@ module InstructionRegister #(
 
     assign dataOut = (outputEnable) ? value : {DATA_BUS_WIDTH{1'bz}};
 
-    initial begin
-        value <= 0;
-    end
+    initial value <= 0;
 
-    always @ (negedge clock)
-        if (!reset)
-            value <= dataIn;
-
-    always @ (reset) begin
-        value <= 0;
-    end
+    always @ (negedge clock) value <= (reset) ? 0 : dataIn;
 
 endmodule
