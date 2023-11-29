@@ -12,7 +12,10 @@ module CPU #(
         input reset,
         input clockEnable,
 
-        input [CLOCK_COUNTER_WIDTH-1:0] clockPeriod
+        input [CLOCK_COUNTER_WIDTH-1:0] clockPeriod,
+
+        output [DATA_BUS_WIDTH-1:0] programCounterOut,
+        output [DATA_BUS_WIDTH-1:0] displayRegister
     );
 
     wire clock;
@@ -69,6 +72,8 @@ module CPU #(
         .readAddressBus(addressBus),
         .writeAddressBus(addressBus)
     );
+
+
 
     // Add program Cache
 

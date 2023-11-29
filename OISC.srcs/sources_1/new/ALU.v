@@ -18,6 +18,7 @@ module ALU #(
     );
 
 
+    // Relative addresses of function units defined here:
     `include "AddressBook.vh"
 
 

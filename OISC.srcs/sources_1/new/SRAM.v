@@ -1,8 +1,8 @@
 
 module SRAM #(
-        DATA_BUS_WIDTH = 64,
-        
-        NUM_WORDS = 1024
+        parameter DATA_BUS_WIDTH = 64,
+        parameter NUM_WORDS = 1024,
+        parameter HEX_FILE = "./filepath.hex"
     ) (
         input reset,
 
