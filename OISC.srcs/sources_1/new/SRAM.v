@@ -22,12 +22,11 @@ module SRAM #(
             data[i] <= 0;
 
     // Data write is transport-triggered
-    always @ (dataIn)
+    always @ (dataIn) begin
         if (!reset)
             data[address] <= dataIn;
-        else begin
-            for (i = 0; i < NUM_WORDS; i = i + 1)
-                data[i] <= 0;
-        end
+        else
+            $readmemh(HEX_FILE, data);
+    end
 
 endmodule
