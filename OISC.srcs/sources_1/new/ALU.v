@@ -3,9 +3,7 @@
 
 module ALU #(
         parameter DATA_BUS_WIDTH = 64,
-        parameter ADDR_BUS_WIDTH = 32,
-
-        parameter BASE_ADDRESS = 64
+        parameter ADDR_BUS_WIDTH = 32
     ) (
         input reset,
         input clock,
@@ -18,7 +16,7 @@ module ALU #(
     );
 
 
-    // Relative addresses of function units defined here:
+    // Addresses of function units defined here:
     `include "AddressBook.vh"
 
 
@@ -26,9 +24,9 @@ module ALU #(
     Compare #(
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
-        .INPUT_ADDRESS_1(BASE_ADDRESS + COMPARE_BASE_ADDRESS + 0),
-        .INPUT_ADDRESS_2(BASE_ADDRESS + COMPARE_BASE_ADDRESS + 1),
-        .OUTPUT_ADDRESS(BASE_ADDRESS + COMPARE_BASE_ADDRESS + 0)
+        .INPUT_ADDRESS_1(ALU_COMPARE_ADDRESS_1),
+        .INPUT_ADDRESS_2(ALU_COMPARE_ADDRESS_2),
+        .OUTPUT_ADDRESS(ALU_COMPARE_ADDRESS_1)
     ) compare (
         .reset(reset),
         .clock(clock),
@@ -44,9 +42,9 @@ module ALU #(
     Adder #(
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
-        .INPUT_ADDRESS_1(ADDER_BASE_ADDRESS + 0),
-        .INPUT_ADDRESS_2(ADDER_BASE_ADDRESS + 1),
-        .OUTPUT_ADDRESS(ADDER_BASE_ADDRESS + 0)
+        .INPUT_ADDRESS_1(ALU_ADD_ADDRESS_1),
+        .INPUT_ADDRESS_2(ALU_ADD_ADDRESS_2),
+        .OUTPUT_ADDRESS(ALU_ADD_ADDRESS_1)
     ) adder (
         .reset(reset),
         .clock(clock),
@@ -59,8 +57,8 @@ module ALU #(
     ArithmeticLeftShift #(
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
-        .INPUT_ADDRESS(A_LSHIFT_BASE_ADDRESS),
-        .OUTPUT_ADDRESS(A_LSHIFT_BASE_ADDRESS)
+        .INPUT_ADDRESS(ALU_A_LSHIFT_ADDRESS),
+        .OUTPUT_ADDRESS(ALU_A_LSHIFT_ADDRESS)
     ) arithmeticLeftShift (
         .reset(reset),
         .clock(clock),
@@ -73,8 +71,8 @@ module ALU #(
     ArithmeticRightShift #(
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
-        .INPUT_ADDRESS(A_RSHIFT_BASE_ADDRESS),
-        .OUTPUT_ADDRESS(A_RSHIFT_BASE_ADDRESS)
+        .INPUT_ADDRESS(ALU_A_RSHIFT_ADDRESS),
+        .OUTPUT_ADDRESS(ALU_A_RSHIFT_ADDRESS)
     ) arithmeticRightShift (
         .reset(reset),
         .clock(clock),

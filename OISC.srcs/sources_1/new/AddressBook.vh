@@ -1,20 +1,56 @@
 // AddressBook.vh
 // tags: #toDo
 
+
 /* SUMMARY:
-This file contains the relative addresses of function
-units within the ALU. They have been separated into this
-header for convenience. 
+This header file contains the addresses of registers within the CPU. It should
+be included inside any file that needs register addresses provided (i.e. ALU, CPU, etc.)
 */
 
 
-parameter    LOGICAL_BASE_ADDRESS = 0;
-parameter ARITHMETIC_BASE_ADDRESS = 32;
 
-// Logical
-parameter COMPARE_BASE_ADDRESS = LOGICAL_BASE_ADDRESS + 0;
+/* Current mappings:
+    0-15      - control unit
+    16-31     - register file
+    32-47     - memory access
+      48-63   - not reserved
+    64-127    - ALU
+      128-255 - not reserved
+*/
 
-// Arithmetic
-parameter A_LSHIFT_BASE_ADDRESS = ARITHMETIC_BASE_ADDRESS + 0;
-parameter A_RSHIFT_BASE_ADDRESS = ARITHMETIC_BASE_ADDRESS + 1;
-parameter    ADDER_BASE_ADDRESS = ARITHMETIC_BASE_ADDRESS + 2;
+
+
+// CONTROL UNIT ADDRESSES
+    localparam PROGRAM_COUNTER_ADDRESS = 1; // 0x01
+
+
+
+// REGISTER FILE
+    localparam REGISTER_FILE_BASE_ADDRESS = 16; // 0x10
+
+
+
+// (DATA) MEMORY ACCESS
+    localparam MBR_ADDRESS = 32; // 0x20
+    localparam MAR_ADDRESS = 33; // 0x21
+
+
+
+// DISPLAY REGISTER
+    localparam DISPLAY_REGISTER_ADDRESS = 48; // 0x30
+
+
+
+// ALU ADDRESSES
+
+    // Logical
+        localparam ALU_COMPARE_ADDRESS_1 = 64; // 0x40
+        localparam ALU_COMPARE_ADDRESS_2 = 65; // 0x41
+
+    // Arithmetic
+        localparam ALU_A_LSHIFT_ADDRESS = 96; // 0x60
+
+        localparam ALU_A_RSHIFT_ADDRESS = 97; // 0x61
+
+        localparam ALU_ADD_ADDRESS_1 = 98; // 0x62
+        localparam ALU_ADD_ADDRESS_2 = 99; // 0x63

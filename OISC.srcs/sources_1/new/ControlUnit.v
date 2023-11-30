@@ -48,7 +48,8 @@ module ControlUnit #(
 
     ProgramCounter #(
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
-        .DATA_BUS_WIDTH(DATA_BUS_WIDTH)
+        .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
+        .ADDRESS(PROGRAM_COUNTER_ADDRESS)
     ) programCounter (
         .reset(reset),
         .clock(clock),

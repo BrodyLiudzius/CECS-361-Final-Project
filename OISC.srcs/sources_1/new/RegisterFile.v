@@ -4,7 +4,8 @@ module RegisterFile #(
         parameter ADDR_BUS_WIDTH = 32,
 
         parameter NUM_REGISTERS = 32,
-        parameter BASE_ADDRESS = 10
+
+        parameter BASE_ADDRESS = 16
     ) (
         input reset,
         input clock,
