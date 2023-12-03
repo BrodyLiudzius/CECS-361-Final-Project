@@ -1,3 +1,5 @@
+// tags: #toDo
+
 `timescale 1ns / 1ps
 
 module DataCache_tb();
@@ -5,13 +7,12 @@ module DataCache_tb();
     // MODULE PORTS
     localparam DATA_BUS_WIDTH = 16;
     localparam ADDR_BUS_WIDTH = 8;
-    localparam HEX_FILE = "./hexTest.mem";
     parameter NUM_WORDS = 16;
     localparam MBR_ADDRESS = 1;
     localparam MAR_ADDRESS = 2;
 
-    reg reset, clock;
-    reg [DATA_BUS_WIDTH-1:0] dataIn;
+    reg reset, clock, programmerWrite;
+    reg [DATA_BUS_WIDTH-1:0] dataIn, programmerAddress, programmerData;
     wire [DATA_BUS_WIDTH-1:0] dataOut;
     reg [ADDR_BUS_WIDTH-1:0] readAddressBus, writeAddressBus;
 
@@ -21,7 +22,6 @@ module DataCache_tb();
     DataCache #(
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
-        .HEX_FILE(HEX_FILE),
         .NUM_WORDS(NUM_WORDS),
         .MBR_ADDRESS(MBR_ADDRESS),
         .MAR_ADDRESS(MAR_ADDRESS)
@@ -31,7 +31,10 @@ module DataCache_tb();
         .dataIn(dataIn),
         .dataOut(dataOut),
         .readAddressBus(readAddressBus),
-        .writeAddressBus(writeAddressBus)
+        .writeAddressBus(writeAddressBus),
+        .programmerWrite(programmerWrite),
+        .programmerAddress(programmerAddress),
+        .programmerData(programmerData)
     );
 
 
@@ -41,6 +44,10 @@ module DataCache_tb();
 
     integer i;
     initial begin
+        programmerWrite = 0;
+        programmerAddress = 0;
+        programmerData = 0;
+
         clock = 0;
         dataIn = 0;
         writeAddressBus = 0;
@@ -52,6 +59,7 @@ module DataCache_tb();
         reset = 0;
         #2;
 
+        // read loop
         writeAddressBus = 2;
         for (i = 0; i < NUM_WORDS; i = i + 1) begin
             dataIn = i;
@@ -59,6 +67,7 @@ module DataCache_tb();
         end
         writeAddressBus = 0;
 
+        // write loop
         for (i = 0; i < NUM_WORDS; i = i + 1) begin
             writeAddressBus = 2;
             dataIn = i;
@@ -69,6 +78,7 @@ module DataCache_tb();
             #10;
         end
 
+        // read loop
         writeAddressBus = 2;
         for (i = 0; i < NUM_WORDS; i = i + 1) begin
             dataIn = i;

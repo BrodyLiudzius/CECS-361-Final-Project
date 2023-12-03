@@ -5,13 +5,14 @@ module ControlUnit #(
 
         parameter CLOCK_COUNTER_WIDTH = 32,
 
-        parameter PROGRAM_COUNTER_ADDRESS = 1
+        parameter PROGRAM_COUNTER_ADDRESS = 1,
+
+        parameter CLOCK_PERIOD = 100_000_000
     ) (
         input reset,
 
         input oscillator,
         input clockEnable,
-        input [CLOCK_COUNTER_WIDTH-1:0] clockPeriod,
         output wire clock,
 
         input [DATA_BUS_WIDTH-1:0] instructionRegisterInput,
@@ -30,12 +31,12 @@ module ControlUnit #(
     wire instructionRegisterEnable, programCounterIncrement;
 
     ClockGenerator #(
-        .CLOCK_COUNTER_WIDTH(CLOCK_COUNTER_WIDTH)
+        .CLOCK_COUNTER_WIDTH(CLOCK_COUNTER_WIDTH),
+        .PERIOD(CLOCK_PERIOD)
     ) clockGenerator (
         .reset(reset),
         .oscillator(oscillator),
         .enable(clockEnable),
-        .period(clockPeriod),
         .clock(clock)
     );
 

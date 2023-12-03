@@ -2,11 +2,11 @@
 module SevenSegmentDriver #(
         parameter NUM_ANODES = 8,
         parameter BIT_WIDTH = 16,
-        parameter COMMON_ANODE = 1
+        parameter COMMON_ANODE = 1,
+        parameter CLOCK_PERIOD = 1_000
     ) (
         input reset,
         input oscillator,
-        input [31:0] period,
 
         input [BIT_WIDTH-1:0] binaryInput,
 
@@ -34,11 +34,11 @@ module SevenSegmentDriver #(
     );
 
     SevenSegmentIndexer #(
-        .NUM_ANODES(NUM_ANODES)
+        .NUM_ANODES(NUM_ANODES),
+        .CLOCK_PERIOD(CLOCK_PERIOD)
     ) sevenSegmentIndexer (
         .reset(reset),
         .oscillator(oscillator),
-        .period(period),
         .anodeMask(anodeMask_temp),
         .index(index)
     );

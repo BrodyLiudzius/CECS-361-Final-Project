@@ -1,31 +1,33 @@
 
 module ClockGenerator #(
-        parameter CLOCK_COUNTER_WIDTH = 32
+        parameter CLOCK_COUNTER_WIDTH = 32,
+        parameter PERIOD = 134217728
     ) (
         input reset,
         input oscillator,
         input enable,
-        input [CLOCK_COUNTER_WIDTH-1:0] period,
         output reg clock
     );
 
     reg [CLOCK_COUNTER_WIDTH-1:0] counter;
 
     initial begin
-        clock = 0;
+        clock = 1;
         counter = 0;
     end
 
-    always @ (posedge oscillator)
-        if (!reset) begin
-            if (enable)
-                counter = (counter < period) ? counter + 1 : 0;
-        end else begin
+    always @ (posedge oscillator or posedge reset) begin
+        if (reset)
             counter = 0;
+        else if (enable) begin
+            case (counter)
+                PERIOD: begin
+                    counter = 0;
+                    clock = ~clock;
+                end
+                default: counter <= counter + 1;
+            endcase
         end
-
-    always @ (counter)
-        if (counter == period - 1)
-           clock = ~clock;
+    end
 
 endmodule

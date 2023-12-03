@@ -13,14 +13,11 @@ module CPU #(
         parameter NUM_WORDS_PROGRAM_MEMORY = 32,
         parameter NUM_WORDS_DATA_MEMORY = 32,
 
-        parameter HEX_FILE_PROGRAM = "program.mem",
-        parameter HEX_FILE_DATA = "data.mem"
+        parameter CLOCK_PERIOD = 100_000_000
     )(
         input oscillator,
         input reset,
         input clockEnable,
-
-        input [CLOCK_COUNTER_WIDTH-1:0] clockPeriod,
 
         output wire [DATA_BUS_WIDTH-1:0] programCounterOut,
         output wire [DATA_BUS_WIDTH-1:0] displayRegisterOut
@@ -37,12 +34,12 @@ module CPU #(
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
         .CLOCK_COUNTER_WIDTH(CLOCK_COUNTER_WIDTH),
-        .PROGRAM_COUNTER_ADDRESS(PROGRAM_COUNTER_ADDRESS)
+        .PROGRAM_COUNTER_ADDRESS(PROGRAM_COUNTER_ADDRESS),
+        .CLOCK_PERIOD(CLOCK_PERIOD)
     ) controlUnit (
         .reset(reset),
         .oscillator(oscillator),
         .clockEnable(clockEnable),
-        .clockPeriod(clockPeriod),
         .clock(clock),
 
         .instructionRegisterInput(instructionRegisterInput),
@@ -84,21 +81,14 @@ module CPU #(
         .writeAddressBus(writeAddressBus)
     );
 
-    SRAM #(
-        .DATA_BUS_WIDTH(2*ADDR_BUS_WIDTH), // instruction is 2 addresses
-        .NUM_WORDS(NUM_WORDS_PROGRAM_MEMORY),
-        .HEX_FILE(HEX_FILE_PROGRAM)
-    ) programCache (
-        .reset(reset),
+    ProgramCache programCache (
         .address(programCounterOut),
-        .dataIn(), // no connect
-        .dataOut(instructionRegisterInput)
+        .instruction(instructionRegisterInput)
     );
 
     DataCache #(
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
-        .HEX_FILE(HEX_FILE_DATA),
         .NUM_WORDS(NUM_WORDS_DATA_MEMORY),
         .MBR_ADDRESS(MBR_ADDRESS),
         .MAR_ADDRESS(MAR_ADDRESS)
@@ -124,5 +114,7 @@ module CPU #(
         .readAddressBus(readAddressBus),
         .writeAddressBus(writeAddressBus)
     );
+    
+
 
 endmodule

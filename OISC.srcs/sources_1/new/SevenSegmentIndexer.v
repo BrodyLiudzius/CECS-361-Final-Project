@@ -1,11 +1,10 @@
 
 module SevenSegmentIndexer #(
-        parameter NUM_ANODES = 8
+        parameter NUM_ANODES = 8,
+        parameter CLOCK_PERIOD = 1_000
     ) (
         input reset,
         input oscillator,
-
-        input [31:0] period,
 
         output reg [NUM_ANODES-1:0] anodeMask,
         output reg [$clog2(NUM_ANODES):0] index
@@ -14,12 +13,12 @@ module SevenSegmentIndexer #(
     wire clock;
 
     ClockGenerator #(
-        .CLOCK_COUNTER_WIDTH(32)
+        .CLOCK_COUNTER_WIDTH(32),
+        .PERIOD(CLOCK_PERIOD)
     ) clockGenerator (
         .reset(reset),
         .oscillator(oscillator),
         .enable(1),
-        .period(period),
         .clock(clock)
     );
     

@@ -2,7 +2,6 @@
 module DataCache #(
         parameter DATA_BUS_WIDTH = 16,
         parameter ADDR_BUS_WIDTH = 8,
-        parameter HEX_FILE = "data.mem",
         parameter NUM_WORDS = 1024,
 
         parameter MBR_ADDRESS = 32,
@@ -19,7 +18,7 @@ module DataCache #(
     );
 
     wire writeEnableMBR, writeEnableMAR;
-    wire [DATA_BUS_WIDTH-1:0] registerDataMBR, registerDataMAR, SRAMData;
+    wire [DATA_BUS_WIDTH-1:0] registerDataMAR, SRAMData;
 
     // MBR
     InputGate #(
@@ -28,16 +27,6 @@ module DataCache #(
     ) inputGateMBR (
         .addressIn(writeAddressBus),
         .writeEnable(writeEnableMBR)
-    );
-
-    Register #(
-        .DATA_BUS_WIDTH(DATA_BUS_WIDTH)
-    ) registerMBR (
-        .reset(reset),
-        .clock(clock),
-        .writeEnable(writeEnableMBR),
-        .dataIn(dataIn),
-        .dataOut(registerDataMBR)
     );
 
     // MAR
@@ -59,17 +48,19 @@ module DataCache #(
         .dataOut(registerDataMAR)
     );
 
+    // Memory
     SRAM #(
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
-        .NUM_WORDS(NUM_WORDS),
-        .HEX_FILE(HEX_FILE)
+        .NUM_WORDS(NUM_WORDS)
     ) dataCache (
         .reset(reset),
+        .write(writeEnableMBR),
         .address(registerDataMAR),
-        .dataIn(registerDataMBR),
+        .dataIn(dataIn),
         .dataOut(SRAMData)
     );
 
+    // Output (MBR)
     OutputGate #(
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),

@@ -39,15 +39,20 @@ module ProgramCounter #(
 
     initial registerData = 0;
 
-    always @ (posedge clock) begin
-        if (!reset) begin
-            if (writeEnable)
-                registerData = dataIn;
-            if (increment)
-                registerData = registerData + 1;
-        end else
+    always @(posedge clock or posedge reset) begin
+        if (reset) begin
             registerData = 0;
+        end else begin
+            if (writeEnable) begin
+                registerData = dataIn;
+            end else if (increment) begin
+                registerData = registerData + 1;
+            end
+        end
     end
 
+    // always @ (posedge clock)
+    //     if (increment)
+    //         registerData <= registerData + 1;
 
 endmodule
