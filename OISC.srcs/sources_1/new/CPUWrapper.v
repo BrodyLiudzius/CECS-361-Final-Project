@@ -21,7 +21,7 @@ module CPUWrapper(
         .REGISTER_FILE_SIZE(16),
         .NUM_WORDS_PROGRAM_MEMORY(32),
         .NUM_WORDS_DATA_MEMORY(32),
-        .PERIOD(20_000_000)
+        .CLOCK_PERIOD(20_000_000)
     ) cpu (
         .oscillator(system_oscillator),
         .reset(system_buttonCenter),

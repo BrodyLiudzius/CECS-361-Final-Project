@@ -1,0 +1,27 @@
+0000 //
+0110 // pc -> gpr0
+0111 // pc -> gpr1
+
+0000 //
+0000 //
+0000 //
+0000 //
+0000 //
+0112 // pc -> gpr2
+1262 // gpr2 -> add0
+1263 // gpr2 -> add1
+6212 // add -> gpr2
+
+1030 // gpr0 -> display
+1062 // gpr0 -> add0
+1130 // gpr1 -> display
+1163 // gpr1 -> add1
+6230 // add -> display
+
+3062 // display -> add0
+6230 // add -> display
+
+3063 // display -> add1
+6230 // add -> display
+
+1201 // gpr2 -> pc
