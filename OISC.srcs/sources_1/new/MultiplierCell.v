@@ -1,3 +1,10 @@
+// tags:
+
+/* SUMMARY:
+Multiplier Cell is meant to be used in array multiplier designs. It is a full adder
+with an AND gate connected to one input--meaning it has four inputs total
+*/
+
 
 module MultiplierCell(
         input a,

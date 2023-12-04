@@ -7,7 +7,7 @@ module CarryLookaheadAdder #(
         input carryIn,
 
         output [BIT_WIDTH-1:0] sum,
-        output carryOut
+        output wire carryOut
     );
 
     wire [BIT_WIDTH-1:0] propagates, generates;
