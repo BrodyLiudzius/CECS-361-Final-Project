@@ -3,6 +3,9 @@
 module ClockGenerator_tb();
 
     // MODULE PORTS
+    localparam CLOCK_COUNTER_WIDTH = 32;
+    localparam PERIOD = 2;
+
     reg oscillator, enable, reset;
     reg [31:0] period;
     wire clock;
@@ -10,11 +13,13 @@ module ClockGenerator_tb();
 
 
     // MODULE INSTANTIATIONS
-    ClockGenerator uut (
+    ClockGenerator #(
+        .CLOCK_COUNTER_WIDTH(CLOCK_COUNTER_WIDTH),
+        .PERIOD(PERIOD)
+    )uut (
         .reset(reset),
         .oscillator(oscillator),
         .enable(enable),
-        .period(period),
         .clock(clock)
     );
 
@@ -27,21 +32,22 @@ module ClockGenerator_tb();
         reset = 1;
         oscillator = 0;
         enable = 0;
-        period = 3;
         #20;
 
         reset = 0;
         enable = 1;
         #120;
 
-        period = 4;
-        #160;
-
         reset = 1;
-        period = 1;
         #10;
 
         reset = 0;
+        #20;
+
+        enable =0;
+        #20;
+
+        enable = 1;
         #20;
 
         $finish;

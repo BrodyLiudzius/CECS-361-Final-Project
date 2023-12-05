@@ -30,6 +30,7 @@ module HalfAdder_tb ();
         for (i = 0; i < 4; i = i + 1) begin
             {a, b} = i;
             #5;
+            
             expected_sum = a ^ b;  // XOR for sum
             expected_carry = a & b;
 

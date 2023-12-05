@@ -47,7 +47,7 @@ module ArithmeticRightShift_tb();
         #10; // reset signal is registered to module
         reset = 0; // then low to begin normal operation
         readAddressBus = OUTPUT_ADDRESS;
-        for (i = 0; i < $pow(2,DATA_BUS_WIDTH); i = i+1) begin
+        for (i = 0; i < $pow(2, DATA_BUS_WIDTH); i = i+1) begin
             writeAddressBus = INPUT_ADDRESS;
             dataBusIn = i;
             #10;

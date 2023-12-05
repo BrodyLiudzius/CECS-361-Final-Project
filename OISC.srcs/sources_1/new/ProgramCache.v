@@ -1,4 +1,4 @@
-// tags: 
+// tags: #staticWidth
 
 /* SUMMARY:
 The program cache is what stores the program for the CPU. Since it is read-only to the CPU, and

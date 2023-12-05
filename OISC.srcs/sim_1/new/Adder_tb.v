@@ -49,11 +49,12 @@ module Adder_tb();
         #10; // reset signal is registered to module
         reset = 0; // then low to begin normal operation
         readAddressBus = OUTPUT_ADDRESS;
-        for (i = 0; i < $pow(2,DATA_BUS_WIDTH); i = i+1) begin
+        for (i = 0; i < $pow(2, DATA_BUS_WIDTH); i = i+1) begin
             writeAddressBus = INPUT_ADDRESS_1;
             dataBusIn = i;
             #10;
-            for (j = 0; j < $pow(2,DATA_BUS_WIDTH); j = j+1) begin 
+            
+            for (j = 0; j < $pow(2, DATA_BUS_WIDTH); j = j+1) begin 
                 writeAddressBus = INPUT_ADDRESS_2;
                 dataBusIn = j;
                 #10;
@@ -64,12 +65,9 @@ module Adder_tb();
                     $display("(", i, ", ", j, ") FAILED.");
                     passed = 0;
                 end
-            
-            
             end
-
-
         end
+
          $display("----------------------");
         if (passed)
             $display("All tests passed");
@@ -79,7 +77,6 @@ module Adder_tb();
         
         $finish;
         
-
     end
 
 endmodule
