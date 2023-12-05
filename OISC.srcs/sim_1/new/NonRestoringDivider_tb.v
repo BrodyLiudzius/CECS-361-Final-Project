@@ -1,32 +1,32 @@
-// tags: #testbench
+// tags: #reference #testbench
 
 /* SUMMARY:
-This is an exhaustive self-checking testbench for the Carry-Save Multiplier. A message will be printed
+This is an exhaustive self-checking testbench for the Non-Restoring Divider. A message will be printed
 in the console if all tests passed. If some failed, this will also be printed as long as which input
 pairs failed.
 */
 
+
 `timescale 1ns / 1ps
 
-module CarrySaveMultiplier_tb();
+module NonRestoringDivider_tb();
 
     // MODULE PORTS
     localparam BIT_WIDTH = 4;
 
     reg [BIT_WIDTH-1:0] a, b;
-    wire [2*BIT_WIDTH-1:0] product;
-    wire carryOut;
+    wire [BIT_WIDTH-1:0] quotient, remainder;
 
 
 
     // MODULE INSTANTIATIONS
-    CarrySaveMultiplier #(
+    NonRestoringDivider #(
         .BIT_WIDTH(BIT_WIDTH)
     ) csm (
         .a(a),
         .b(b),
-        .product(product),
-        .carryOut(carryOut)
+        .quotient(quotient),
+        .remainder(remainder)
     );
 
 
@@ -35,7 +35,7 @@ module CarrySaveMultiplier_tb();
     integer i, j;
 
     reg passed;
-    reg [2*BIT_WIDTH:0] expected;
+    reg [BIT_WIDTH-1:0] expectedQuotient, expectedRemainder;
 
     initial begin
         passed = 1; // innocent until proven guilty
@@ -46,9 +46,10 @@ module CarrySaveMultiplier_tb();
                 b = j;
                 #0.1;
 
-                expected = i * j;
+                expectedQuotient = i / j;
+                expectedRemainder = i % j;
 
-                if ({carryOut, product} !== expected) begin
+                if (quotient !== expectedQuotient || remainder !== expectedRemainder) begin
                     $display("(", i, ", ", j, ") FAILED.");
                     passed = 0;
                 end

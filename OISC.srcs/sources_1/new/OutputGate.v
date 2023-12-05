@@ -1,3 +1,10 @@
+// tags: 
+
+/* SUMMARY:
+The output gate checks if its address was specified on the bus it is attached to. If so,
+it lets the data going into it pass through to the output. Otherwise, it outputs a high
+impedance
+*/
 
 module OutputGate #(
         parameter DATA_BUS_WIDTH = 64,

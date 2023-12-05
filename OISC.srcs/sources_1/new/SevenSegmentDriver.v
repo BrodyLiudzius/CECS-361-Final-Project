@@ -1,3 +1,10 @@
+// tags:
+
+/* SUMMARY:
+Combines the various submodules that together take a binary number, convert it
+to a seven-segment decimal representation, and then generates the timings to
+operate the seven segment display
+*/
 
 module SevenSegmentDriver #(
         parameter NUM_ANODES = 8,

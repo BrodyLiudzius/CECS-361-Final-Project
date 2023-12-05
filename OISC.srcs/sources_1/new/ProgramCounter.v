@@ -1,3 +1,12 @@
+// tags: 
+
+/* SUMMARY:
+Part of the control Unit.
+
+The Program Counter stores the address of the current instruction being executed from
+the program cache. It has an input to increment the value stored in it so that the
+next instruction can be fetched
+*/
 
 module ProgramCounter #(
         parameter DATA_BUS_WIDTH = 64,
@@ -39,7 +48,7 @@ module ProgramCounter #(
 
     initial registerData = 0;
 
-    always @(posedge clock or posedge reset) begin
+    always @(posedge clock, posedge reset) begin
         if (reset) begin
             registerData = 0;
         end else begin
@@ -50,9 +59,5 @@ module ProgramCounter #(
             end
         end
     end
-
-    // always @ (posedge clock)
-    //     if (increment)
-    //         registerData <= registerData + 1;
 
 endmodule

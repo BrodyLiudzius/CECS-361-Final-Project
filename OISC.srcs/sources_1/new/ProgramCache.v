@@ -1,4 +1,11 @@
-`timescale 1ns / 1ps
+// tags: 
+
+/* SUMMARY:
+The program cache is what stores the program for the CPU. Since it is read-only to the CPU, and
+this project does not implement any higher forms of memory like RAM, the program cache is simply
+hard-coded using a case statement for simplicity. It is the easiest way to have the CPU start
+with a program available for it to execute.
+*/
 
 module ProgramCache(
         input [15:0] address,

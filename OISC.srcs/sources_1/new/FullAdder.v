@@ -1,3 +1,4 @@
+// tags:
 
 module FullAdder(
         input a,

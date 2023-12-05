@@ -1,34 +1,34 @@
-// tags:
+// tags: 
 
-/* SUMMARY
-Same as GeneralPurposeRegister module excpet it exposes the data within it
-via the `dataTap` output
+/* SUMMARY:
+This is a function unit that implements logical left shifting with all the
+necessary bus interfaces
 */
 
-module DisplayRegister #(
+module LogicalLeftShift #(
         parameter DATA_BUS_WIDTH = 64,
         parameter ADDR_BUS_WIDTH = 32,
 
-        parameter ADDRESS = 1
+        parameter INPUT_ADDRESS = 1,
+        parameter OUTPUT_ADDRESS = 1
     ) (
         input reset,
         input clock,
 
-        input [DATA_BUS_WIDTH-1:0] dataIn,
-        output wire [DATA_BUS_WIDTH-1:0] dataOut,
-
-        output wire [DATA_BUS_WIDTH-1:0] dataTap,
+        input [DATA_BUS_WIDTH-1:0] dataBusIn,
+        output wire [DATA_BUS_WIDTH-1:0] dataBusOut,
 
         input [ADDR_BUS_WIDTH-1:0] readAddressBus,
         input [ADDR_BUS_WIDTH-1:0] writeAddressBus
     );
 
     wire writeEnable;
-    wire [DATA_BUS_WIDTH-1:0] registerData;
+    wire [DATA_BUS_WIDTH-1:0] a;
+    wire [DATA_BUS_WIDTH-1:0] out;
 
     InputGate #(
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
-        .ADDRESS(ADDRESS)
+        .ADDRESS(INPUT_ADDRESS)
     ) inputGate (
         .addressIn(writeAddressBus),
         .writeEnable(writeEnable)
@@ -40,19 +40,22 @@ module DisplayRegister #(
         .reset(reset),
         .clock(clock),
         .writeEnable(writeEnable),
-        .dataIn(dataIn),
-        .dataOut(registerData)
+        .dataIn(dataBusIn),
+        .dataOut(a)
     );
 
-    assign dataTap = registerData;
+
+    assign out = a << 1;
+
 
     OutputGate #(
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
-        .ADDRESS(ADDRESS)
-    ) outputGate (
+        .ADDRESS(OUTPUT_ADDRESS)
+    ) outputGate1 (
         .addressIn(readAddressBus),
-        .dataIn(registerData),
-        .dataOut(dataOut)
+        .dataIn(out),
+        .dataOut(dataBusOut)
     );
+
 endmodule

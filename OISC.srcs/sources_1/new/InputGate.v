@@ -1,3 +1,9 @@
+// tags:
+
+/* SUMMARY:
+The Input Gate checks if its address was specified on the bus it is attached
+to and if so, emits a writeEnable signal
+*/
 
 module InputGate #(
         parameter ADDR_BUS_WIDTH = 64,

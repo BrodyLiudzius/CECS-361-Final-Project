@@ -1,3 +1,8 @@
+// tags: 
+
+/* SUMMARY:
+SRAM is a simple read/write memory module that can be resized using the parameters
+*/
 
 module SRAM #(
         DATA_BUS_WIDTH = 64,
@@ -23,13 +28,13 @@ module SRAM #(
         for (i = 0; i < NUM_WORDS; i = i + 1)
             data[i] <= 0;
 
-    // Data write is transport-triggered
     always @ (posedge write)
-        if (!reset)
-            data[address] <= dataIn;
-        else
+        if (reset)
             for (i = 0; i < NUM_WORDS; i = i + 1)
                 data[i] <= 0;
+        else
+            data[address] <= dataIn;
+            
 
         
 

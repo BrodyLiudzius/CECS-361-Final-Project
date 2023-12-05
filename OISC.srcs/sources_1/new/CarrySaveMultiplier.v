@@ -1,4 +1,4 @@
-// tags: 
+// tags: #reference
 
 /* SUMMARY:
 Combinational multiplier derived from an array multiplier. Carry save multiplier saves all carries to the very last
@@ -6,7 +6,9 @@ row of the array. In this implementation, the last row of the array then uses a 
 */
 
 
-// Reference: https://coertvonk.com/hw/building-math-circuits/faster-parameterized-multiplier-in-verilog-30774
+/* REFERENCES:
+- https://coertvonk.com/hw/building-math-circuits/faster-parameterized-multiplier-in-verilog-30774
+*/
 
 module CarrySaveMultiplier #(
         parameter BIT_WIDTH = 4

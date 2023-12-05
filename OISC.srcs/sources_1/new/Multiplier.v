@@ -1,5 +1,10 @@
 // tags: 
 
+/* SUMMARY:
+This is an ALU function unit that instantiates a CarrySaveMultiplier and provides it with
+the necessary bus interfaces
+*/
+
 module Multiplier #(
         parameter DATA_BUS_WIDTH = 64,
         parameter ADDR_BUS_WIDTH = 32,

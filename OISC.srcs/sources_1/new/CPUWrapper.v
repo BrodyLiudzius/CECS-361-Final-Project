@@ -1,3 +1,10 @@
+// tags: #top
+
+/* SUMMARY:
+This is the Top Module. CPUWrapper is just an interface between the CPU module and the
+board IO in the constraint file. It is also where the seven segment driver is
+instantiated.
+*/
 
 module CPUWrapper(
         input system_oscillator,

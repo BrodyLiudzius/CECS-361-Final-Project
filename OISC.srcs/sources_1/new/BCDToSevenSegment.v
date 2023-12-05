@@ -1,3 +1,9 @@
+// tags:
+
+/* SUMMARY:
+This module takes a BCD (4-bit) input and creates the necessary signals for
+the seven segments of a display
+*/
 
 module BCDToSevenSegment (
         input [3:0] BCD,

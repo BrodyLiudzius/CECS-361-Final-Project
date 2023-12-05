@@ -1,3 +1,8 @@
+// tags: 
+
+/* SUMMARY:
+The data cache is where bulk data is stored for the CPU. It can be read from and written to.
+*/
 
 module DataCache #(
         parameter DATA_BUS_WIDTH = 16,

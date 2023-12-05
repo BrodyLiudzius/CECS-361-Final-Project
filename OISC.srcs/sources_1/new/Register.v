@@ -1,3 +1,8 @@
+// tags: 
+
+/* SUMMARY:
+Creates a register of the specified width
+*/
 
 module Register #(
         parameter DATA_BUS_WIDTH = 64

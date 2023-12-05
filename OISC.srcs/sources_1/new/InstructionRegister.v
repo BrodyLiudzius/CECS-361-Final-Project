@@ -1,3 +1,11 @@
+// tags:
+
+/* SUMMARY:
+The instruction register holds the current instruction to be executed. It
+acts as a buffer for instruction retrieved from the ProgramCache in the CPU.
+When it recieves an enable signal, it executes the current instruction by
+placing it on the address buses (represented with `dataOut` here)
+*/
 
 module InstructionRegister #(
         parameter DATA_BUS_WIDTH = 64

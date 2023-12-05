@@ -1,4 +1,9 @@
-`timescale 1ns / 1ps
+// tags: 
+
+
+/* SUMMARY:
+This is an arithmetic left shift function unit that adds the necessary bus interfaces to the shift logic
+*/
 
 module ArithmeticLeftShift #(
         parameter DATA_BUS_WIDTH = 64,
@@ -47,7 +52,7 @@ module ArithmeticLeftShift #(
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
         .ADDRESS(OUTPUT_ADDRESS)
-    ) outputGate1 (
+    ) outputGate (
         .addressIn(readAddressBus),
         .dataIn(out),
         .dataOut(dataBusOut)

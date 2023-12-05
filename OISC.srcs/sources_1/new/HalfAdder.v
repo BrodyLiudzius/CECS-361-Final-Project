@@ -1,3 +1,4 @@
+// tags:
 
 module HalfAdder (
         input a,

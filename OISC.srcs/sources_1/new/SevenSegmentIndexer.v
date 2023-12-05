@@ -1,3 +1,8 @@
+// tags: 
+
+/* SUMMARY:
+Generates timings for a seven segment display. Used in SevenSegmentDriver
+*/
 
 module SevenSegmentIndexer #(
         parameter NUM_ANODES = 8,
@@ -29,12 +34,12 @@ module SevenSegmentIndexer #(
     end
 
     always @ (posedge clock) begin
-        if (!reset) begin
-            index = (index >= (NUM_ANODES-1)) ? 0 : index + 1;
-            anodeMask = 1 << index;
-        end else begin
+        if (reset) begin
             index = 0;
             anodeMask = 1;
+        end else begin
+            index = (index >= (NUM_ANODES-1)) ? 0 : index + 1;
+            anodeMask = 1 << index;
         end
     end
 

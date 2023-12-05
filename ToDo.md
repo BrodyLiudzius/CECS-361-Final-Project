@@ -5,19 +5,13 @@ Tags: `#toDo`, `#meta`
 ## Vital Tasks
 The following tasks *need* to be completed
 
-- Add ALU module
+- Merge in testbench branch
 - Complete logical and arithmetic function units
-    - Logical
-        - AND
-        - OR
-        - XOR
-        - Logical left shift
-        - Logical right shift
-    - Arithmetic
-        - Divide
-- Fix reset logic in `always` blocks (make it dual sensitivity list)
+    - Divide
 - Rewrite testbenches to be exhaustive and self-checking
 - Fix two-state equality checks in testbenches
+- Make sure all outputs are `reg` or `wire`
+- Run all testbenches to make sure they work
 
 ## Non-vital tasks
 These tasks are not required, but would be nice

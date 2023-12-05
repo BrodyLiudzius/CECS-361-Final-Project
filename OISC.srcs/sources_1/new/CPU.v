@@ -1,6 +1,8 @@
 // tags:
 
-// toDo: The addresses should be moved to a header file and included
+/* SUMMARY:
+The CPU simply links together submodules to create the full functionality
+*/
 
 module CPU #(
         parameter DATA_BUS_WIDTH = 16,

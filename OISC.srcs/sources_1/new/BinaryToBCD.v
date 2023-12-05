@@ -1,4 +1,11 @@
-`timescale 1ns / 1ps
+// tags:
+
+/* SUMMARY:
+This module takes an unsigned binary input and will convert it to the specified number of
+BCD digits. If the binary integer has a larger decimal representation than the number of
+BCD digits specified, the higher-order digits will be cut off (i.e the one's place will
+always be displayed but the highest digit place might not be)
+*/
 
 module BinaryToBCD #(
         parameter BIT_WIDTH = 16,

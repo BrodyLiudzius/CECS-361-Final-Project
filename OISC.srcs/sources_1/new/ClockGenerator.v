@@ -1,3 +1,11 @@
+// tags:
+
+/* SUMMARY:
+This module takes an oscillator such as the one provided on the fpga development board
+and steps the frequency down. It will count oscillator pulses until they match the
+value specified by the `PERIOD` parameter. Every time this occurs, the clock signal
+it outputs will be toggled.
+*/
 
 module ClockGenerator #(
         parameter CLOCK_COUNTER_WIDTH = 32,
@@ -16,7 +24,7 @@ module ClockGenerator #(
         counter = 0;
     end
 
-    always @ (posedge oscillator or posedge reset) begin
+    always @ (posedge oscillator, posedge reset) begin
         if (reset)
             counter = 0;
         else if (enable) begin

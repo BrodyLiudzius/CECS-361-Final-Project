@@ -1,3 +1,10 @@
+// tags: 
+
+/* SUMMARY:
+This file serves as a middle-man between the ports of the Program Counter module and
+the IO connections in the constraint file. It helped with troubleshooting issues
+synthesizing to the fpga board
+*/
 
 module ProgramCounterWrapper(
         input system_oscillator,

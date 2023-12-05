@@ -1,3 +1,10 @@
+// tags: 
+
+/* SUMMARY:
+The Control Unit module simply links together submodules to create the full functionality of
+a control unit
+*/
+
 
 module ControlUnit #(
         parameter DATA_BUS_WIDTH = 16,

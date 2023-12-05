@@ -1,3 +1,9 @@
+// tags: 
+
+/* SUMMARY:
+Instantiates the specified number of general purpose registers with
+the register addresses starting at the specified address
+*/
 
 module RegisterFile #(
         parameter DATA_BUS_WIDTH = 64,

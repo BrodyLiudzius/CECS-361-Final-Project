@@ -1,3 +1,9 @@
+// tags:
+
+/* SUMMARY:
+This module is a combinational binary addition circuit using carry lookahead. It
+can be resized to take binary inputs of any width.
+*/
 
 module CarryLookaheadAdder #(
         parameter BIT_WIDTH = 4

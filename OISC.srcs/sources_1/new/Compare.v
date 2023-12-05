@@ -1,3 +1,10 @@
+// tags:
+
+/* SUMMARY:
+This is a function unit that compares the two input numbers to check whether they are equal,
+greater than, etc.. The first bit of the ouput is high when both inputs are equal. The second
+bit is high when the first input is larger than the second input.
+*/
 
 module Compare #(
         parameter DATA_BUS_WIDTH = 64,
@@ -65,7 +72,7 @@ module Compare #(
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
         .ADDRESS(OUTPUT_ADDRESS)
-    ) outputGate1 (
+    ) outputGate (
         .addressIn(readAddressBus),
         .dataIn(out),
         .dataOut(dataBusOut)

@@ -1,3 +1,10 @@
+// tags: 
+
+/* SUMMARY:
+This is a general-purpose CPU register. It has necessary bus interfaces to be directly
+instantiated and attached to CPU buses.
+*/
+
 
 module GeneralPurposeRegister #(
         parameter DATA_BUS_WIDTH = 64,

@@ -1,11 +1,10 @@
-// tags:
+// tags: 
 
 /* SUMMARY:
-This is an ALU function unit that instantiates a carry lookahead adder and provides it with
-the necessary bus interfaces
+This is a boolean AND function unit that adds the necessary bus interfaces to the AND logic
 */
 
-module Adder #(
+module AND #(
         parameter DATA_BUS_WIDTH = 64,
         parameter ADDR_BUS_WIDTH = 32,
 
@@ -64,15 +63,7 @@ module Adder #(
     );
 
 
-    CarryLookaheadAdder #(
-        .BIT_WIDTH(DATA_BUS_WIDTH)
-    ) cla (
-        .a(a),
-        .b(b),
-        .carryIn(1'b0),
-        .sum(out),
-        .carryOut()
-    );
+    assign out = a & b;
 
 
     OutputGate #(

@@ -1,3 +1,9 @@
+// tags: 
+
+/* SUMMARY:
+A modified full adder that instead outputs a sum, propagate, and generate signal.
+It is intended for use in a carry lookahead adder
+*/
 
 module PartialFullAdder(
         input a,

@@ -1,3 +1,11 @@
+// tags: 
+
+/* SUMMARY:
+Part of the control unit.
+
+The sequencer generates the two alternating control signals for the instruction
+register and program counter.
+*/
 
 module Sequencer (
         input reset,
@@ -14,24 +22,6 @@ module Sequencer (
         instructionRegisterEnable = 1;
         programCounterIncrement = 0;
     end
-
-    // always @ (posedge clock or posedge reset)
-    //     if (reset) begin
-    //         state = 0;
-    //         instructionRegisterEnable = 0;
-    //         programCounterIncrement = 0;
-    //     end else begin
-    //         case (state)
-    //             0: begin
-    //                 {programCounterIncrement, instructionRegisterEnable} = 2'b01;
-    //             end
-    //             1: begin
-    //                 {programCounterIncrement, instructionRegisterEnable} = 2'b10;
-    //             end
-    //         endcase
-            
-    //         state = ~state;
-    //     end
 
     always @ (negedge clock) begin
         instructionRegisterEnable <= ~instructionRegisterEnable;

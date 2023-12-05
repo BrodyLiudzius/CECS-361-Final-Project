@@ -1,12 +1,18 @@
+// tags:
+
+/* SUMMARY:
+This is a single cell meant to be used in array dividers. It is also known as
+a Conditional Adder Subtractor (CAS)
+*/
 
 module DividerCell (
-        input a,
-        input b,
+        input a, // dividend
+        input b, //divisor
         input carryIn,
         input previous,
 
-        output carryOut,
-        output diffOut
+        output wire carryOut,
+        output wire sum
     );
 
     FullAdder fullAdder (
@@ -14,7 +20,7 @@ module DividerCell (
         .b(b ^ previous),
         .carryIn(carryIn),
         .carryOut(carryOut),
-        .sum(diffOut)
+        .sum(sum)
     );
 
 endmodule
