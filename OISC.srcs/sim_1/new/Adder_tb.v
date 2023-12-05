@@ -3,8 +3,8 @@
 module Adder_tb();
 
     // MODULE PORTS
-    localparam DATA_BUS_WIDTH = 16;
-    localparam ADDR_BUS_WIDTH = 8;
+    localparam DATA_BUS_WIDTH = 8;
+    localparam ADDR_BUS_WIDTH = 4;
     localparam INPUT_ADDRESS_1 = 1;
     localparam INPUT_ADDRESS_2 = 2;
     localparam OUTPUT_ADDRESS = 1;
@@ -12,8 +12,8 @@ module Adder_tb();
     reg reset, clock;
     reg [DATA_BUS_WIDTH-1:0] dataBusIn;
     wire [DATA_BUS_WIDTH-1:0] dataBusOut;
-    reg [ADDR_BUS_WIDTH-1:0] readAddressBus, writeAddressBus; 
-
+    reg [ADDR_BUS_WIDTH-1:0] readAddressBus, writeAddressBus;
+    
 
 
     // MODULE INSTANTIATIONS
@@ -37,28 +37,48 @@ module Adder_tb();
     // PROCEDURES
     always #5 clock = ~clock;
 
+    reg passed;
+    integer i,j;
+
+    reg [DATA_BUS_WIDTH-1:0] expected;
+
     initial begin
-        reset = 0;
+        passed = 1;
+        reset = 1; 
         clock = 0;
-        readAddressBus = 1;
+        #10; // reset signal is registered to module
+        reset = 0; // then low to begin normal operation
+        readAddressBus = OUTPUT_ADDRESS;
+        for (i = 0; i < $pow(2,DATA_BUS_WIDTH); i = i+1) begin
+            writeAddressBus = INPUT_ADDRESS_1;
+            dataBusIn = i;
+            #10;
+            for (j = 0; j < $pow(2,DATA_BUS_WIDTH); j = j+1) begin 
+                writeAddressBus = INPUT_ADDRESS_2;
+                dataBusIn = j;
+                #10;
 
-        writeAddressBus = 1;
-        dataBusIn = 10;
-        #10;
+                expected = i + j;
 
-        writeAddressBus = 2;
-        dataBusIn = 10;
-        #10;
+                if (dataBusOut != expected)begin
+                    $display("(", i, ", ", j, ") FAILED.");
+                    passed = 0;
+                end
+            
+            
+            end
 
-        writeAddressBus = 2;
-        dataBusIn = {DATA_BUS_WIDTH{1'b1}};
-        #10;
 
-        writeAddressBus = 2;
-        dataBusIn = 6;
-        #10;
-
+        end
+         $display("----------------------");
+        if (passed)
+            $display("All tests passed");
+        else
+            $display("Tests FAILED");
+        $display("---------------------");
+        
         $finish;
+        
 
     end
 
