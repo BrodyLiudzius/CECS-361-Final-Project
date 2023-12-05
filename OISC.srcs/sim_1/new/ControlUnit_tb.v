@@ -7,10 +7,10 @@ module ControlUnit_tb();
     localparam ADDR_BUS_WIDTH = 8;
     localparam CLOCK_COUNTER_WIDTH = 8;
     localparam PROGRAM_COUNTER_ADDRESS = 1;
+    localparam CLOCK_PERIOD = 1;
 
     reg reset, oscillator, clockEnable;
     wire clock;
-    reg [CLOCK_COUNTER_WIDTH-1:0] period;
     reg [DATA_BUS_WIDTH-1:0] instructionRegisterInput;
     wire [DATA_BUS_WIDTH-1:0] dataBus, programCounter;
     wire [ADDR_BUS_WIDTH-1:0] readAddressBus, writeAddressBus;
@@ -23,13 +23,13 @@ module ControlUnit_tb();
         .DATA_BUS_WIDTH(DATA_BUS_WIDTH),
         .ADDR_BUS_WIDTH(ADDR_BUS_WIDTH),
         .CLOCK_COUNTER_WIDTH(CLOCK_COUNTER_WIDTH),
-        .PROGRAM_COUNTER_ADDRESS(PROGRAM_COUNTER_ADDRESS)
+        .PROGRAM_COUNTER_ADDRESS(PROGRAM_COUNTER_ADDRESS),
+        .CLOCK_PERIOD(CLOCK_PERIOD)
     ) controlUnit (
         .reset(reset),
 
         .oscillator(oscillator),
         .clockEnable(clockEnable),
-        .clockPeriod(period),
         .clock(clock),
 
         .instructionRegisterInput(instructionRegisterInput),
@@ -80,7 +80,6 @@ module ControlUnit_tb();
         reset = 1;
         oscillator = 0;
         clockEnable = 0;
-        period = 2;
         instructionRegisterInput = 0;
         #20;
         
