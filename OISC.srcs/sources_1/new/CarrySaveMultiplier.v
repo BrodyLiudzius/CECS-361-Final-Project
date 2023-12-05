@@ -38,7 +38,7 @@ module CarrySaveMultiplier #(
         // rest of the array
         for (i = 1; i < BIT_WIDTH; i = i + 1) begin
             for (j = 0; j < BIT_WIDTH; j = j + 1) begin
-                MultiplierCell mc (.a(a[j]), .b(b[i]), .sumIn((j == 3) ? 0 : sums[i-1][j+1]), .carryIn(carries[i-1][j]), .sumOut(sums[i][j]), .carryOut(carries[i][j]));
+                MultiplierCell mc (.a(a[j]), .b(b[i]), .sumIn((j == BIT_WIDTH) ? 0 : sums[i-1][j+1]), .carryIn(carries[i-1][j]), .sumOut(sums[i][j]), .carryOut(carries[i][j]));
             end
         end
 
